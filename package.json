@@ -1,0 +1,37 @@
+{
+  "name": "mmm-ticktick",
+  "version": "1.0.0",
+  "description": "TickTick MagicMirror Integration",
+  "main": "MMM-TickTick.js",
+  "scripts": {
+    "auth": "node auth.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sigel/mmm-ticktick.git"
+  },
+  "keywords": [
+    "template"
+  ],
+  "author": "Sigel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sigel/mmm-ticktick"
+  },
+  "homepage": "https://github.com/sigel/mmm-ticktick",
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@stylistic/eslint-plugin": "^2.7.2",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "express": "^5.1.0",
+    "open": "^6.4.0",
+    "readline": "^1.3.0"
+  }
+}
