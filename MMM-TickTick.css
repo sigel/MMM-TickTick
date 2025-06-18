@@ -1,0 +1,19 @@
+.MMM-TickTick {
+    
+}
+
+.project-name {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-top: 10px;
+}
+
+.ticktick-task {
+	margin-left: 10px;
+}
+
+.due-date {
+	color: gray;
+	font-size: 0.9em;
+	margin-left: 8px;
+}

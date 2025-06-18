@@ -1,0 +1,22 @@
+<div class="ticktick-header">
+    <h2>{{ title }}</h2>
+</div>
+{% for project, tasks in tasksByProject %}
+    {% if tasks.length > 0 %}
+        <div class="ticktick-project">
+            <h3 class="project-name">{{ project }}</h3>
+            <ul>
+                {% for task in tasks %}
+                    <li class="ticktick-task">
+                        <span class="task-title">{{ task.title }}</span>
+                        {% if task.dueDate %}
+                            <span class="due-date">
+                                {{ task.dueDate }}
+                            </span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endfor %}

@@ -49,6 +49,7 @@ app.get('/callback', async (req, res) => {
   }
 
   try {
+    console.log('Exchanging authorization code for tokens...');
     const tokenRes = await axios.post('https://ticktick.com/oauth/token', null, {
       params: {
         client_id: clientId,
@@ -59,12 +60,17 @@ app.get('/callback', async (req, res) => {
       },
     });
 
+    console.log('Tokens received successfully:', {
+      access_token: tokenRes.data.access_token ? '✓' : '✗',
+      expires_in: tokenRes.data.expires_in
+    });
+
     fs.writeFileSync(path.join(__dirname, 'token.json'), JSON.stringify(tokenRes.data, null, 2));
     res.send('✅ Authorization successful! You can close this window.');
     console.log('Token saved to token.json');
     process.exit(0);
   } catch (err) {
-    console.error('Token exchange failed:', err.response?.data || err.message);
+    console.error('Token exchange failed:', (err.response && err.response.data) || err.message);
     res.send('❌ Authorization failed. Check console.');
     process.exit(1);
   }
