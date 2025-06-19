@@ -34,10 +34,13 @@
 
 .MMM-TickTick .ticktick-header h2 {
     margin: 0;
+	font-size: 1.25em;
 }
 
 .MMM-TickTick .ticktick-header .logo {
-	margin-right: 20px;
+	width: 36px;
+	height: auto;
+	margin-right: 16px;
 }
 
 .MMM-TickTick .ticktick-project {
@@ -46,9 +49,12 @@
 .MMM-TickTick .project-name {
 	margin: 0;
 	padding: 4px 12px;
-	border-radius: 4px;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-left: 3px solid #42a5f6;
 	background: rgba(0,0,0,.55);
-	font-size: .9em;
+	font-size: .8em;
+	text-transform: uppercase;
 }
 
 .MMM-TickTick .task-title {
