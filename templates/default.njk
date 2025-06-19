@@ -1,23 +1,27 @@
+{% if displayHeader %}
 <div class="ticktick-header">
     <img class="logo" src="modules/MMM-TickTick/logo.svg" alt="TickTick Logo" />
     <h2>{{ title }}</h2>
 </div>
-{% for project, tasks in tasksByProject %}
-    {% if tasks.length > 0 %}
-        <div class="ticktick-project">
-            <h3 class="project-name">{{ project }}</h3>
-            <ul>
-                {% for task in tasks %}
-                    <li class="ticktick-task">
-                        <span class="task-title">{{ task.title }}</span>
-                        {% if task.formattedDueDate %}
-                            <span class="due-date {{ task.dueClass }}">
-                                {{ task.formattedDueDate }}
-                            </span>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-{% endfor %}
+{% endif %}
+<div id="ticktick-project-container" class="{{ displayStyle }}">
+    {% for project, tasks in tasksByProject %}
+        {% if tasks.length > 0 %}
+            <div class="ticktick-project">
+                <h3 class="project-name">{{ project }}</h3>
+                <ul>
+                    {% for task in tasks %}
+                        <li class="ticktick-task">
+                            <span class="task-title">{{ task.title }}</span>
+                            {% if task.formattedDueDate %}
+                                <span class="due-date {{ task.dueClass }}">
+                                    {{ task.formattedDueDate }}
+                                </span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

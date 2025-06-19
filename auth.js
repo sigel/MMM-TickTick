@@ -4,22 +4,59 @@ const axios = require('axios');
 const open = require('open');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 const app = express();
 const PORT = 8081;
-const REDIRECT_URI = `http://localhost:${PORT}/callback`;
 
-app.use(express.urlencoded({ extended: true })); // form parsing middleware :contentReference[oaicite:1]{index=1}
+// Utility: Get local IP (e.g., 192.168.1.x)
+function getLocalIp() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return null;
+}
+
+const localIp = getLocalIp() || 'localhost';
+const REDIRECT_URI = `http://${localIp}:${PORT}/callback`;
+
+app.use(express.urlencoded({ extended: true }));
+app.use('/auth.css', express.static(path.join(__dirname, 'auth.css')));
+app.use('/logo.svg', express.static(path.join(__dirname, 'logo.svg')));
 
 // Serve HTML form for credentials
 app.get('/', (req, res) => {
   res.send(`
-    <h2>MMM‑TickTick Authentication</h2>
-    <form action="/auth" method="post">
-      <label>Client ID:<br><input name="clientId" required></label><br><br>
-      <label>Client Secret:<br><input name="clientSecret" required></label><br><br>
-      <button type="submit">Authorize</button>
-    </form>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>MMM-TickTick Authentication</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="/auth.css">
+    </head>
+    <body>
+      <div class="container">
+          <div class="box">
+            <img src="/logo.svg" alt="TickTick Logo" />
+            <h2>Authentication</h2>
+            <form action="/auth" method="post">
+              <label>Client ID:</label>
+              <input name="clientId" placeholder="Client ID..." required>
+              <label>Client Secret:</label>
+              <input name="clientSecret" placeholder="Client Secret..." required>
+              <button type="submit">Authorize</button>
+            </form>
+            <p class="small"><a href="https://developer.ticktick.com/manage" target="_blank">Click here</a> to register your application and obtain a Client ID and Client Secret.</p>
+          </div>
+      </div>
+    </body>
+    </html>
   `);
 });
 
@@ -35,7 +72,7 @@ app.post('/auth', (req, res) => {
   app.locals.clientId = clientId;
   app.locals.clientSecret = clientSecret;
 
-  open(authUrl);
+  res.redirect(authUrl);
   res.send(`Please authorize in the browser… If it doesn't open automatically, <a href="${authUrl}" target="_blank">click here</a>.`);
 });
 
@@ -77,5 +114,5 @@ app.get('/callback', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Open http://localhost:${PORT}/ in your browser to authenticate.`);
+  console.log(`Open http://${localIp}:${PORT}/ in your browser to authenticate. Make sure address matches OAuth redirect URL in TickTick App.`);
 });

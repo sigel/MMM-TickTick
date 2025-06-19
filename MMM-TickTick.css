@@ -1,8 +1,8 @@
 .MMM-TickTick {
-	min-width: 325px;
+	width: 100%;
 	padding: .75em;
 	border-radius: 8px;
-    background: rgba(0,0,0,.75);
+    background: rgba(0,0,0,.65);
 	color: #fff;
 }
 
@@ -46,6 +46,7 @@
 .MMM-TickTick .ticktick-project {
 	margin-bottom: 10px;
 }
+
 .MMM-TickTick .project-name {
 	margin: 0;
 	padding: 4px 12px;
@@ -62,11 +63,27 @@
 }
 
 .MMM-TickTick .due-date {
-	color: #b3b2b2;
+	color: #cbc7c7;
 	font-size: 0.9em;
 	text-transform: uppercase;
 }
 
-.MMM-TickTick .today { color: #fec107; }
-.MMM-TickTick .tomorrow { color: #42a5f6; }
-.MMM-TickTick .paste-due { color: red; }
+.MMM-TickTick .today { color: #2ecc71; }
+.MMM-TickTick .tomorrow { color: #fec107; }
+.MMM-TickTick .past-due { color: #FF4040; }
+
+#ticktick-project-container.rotate .ticktick-project { display: none; }
+#ticktick-project-container.rotate .ticktick-project.active { display: block; }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: 2s fadeIn;
+}

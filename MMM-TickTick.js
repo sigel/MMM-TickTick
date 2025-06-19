@@ -2,9 +2,10 @@ Module.register("MMM-TickTick", {
     defaults: {
         tokenFilePath: "token.json", // Path to the token file
         refreshInterval: 10 * 60 * 1000, // default 10 minutes
-        title: "TickTick Tasks",
+        title: "TickTick Tasks", // Title Displayed in Header
+        displayHeader: true, // Show TickTick Logo & Title
         displayStyle: "list", // list or rotate
-        maxTasks: 10,
+        maxTasks: 10, // Max tasks to show per project
         projects: [ 
 			{ name: "My Tasks", pid: "58c5bf923109d118d45725a4" }
 		]
@@ -14,10 +15,6 @@ Module.register("MMM-TickTick", {
         console.log("[MMM-TickTick] Module started");
         this.tasks = [];
         this.updateDom();
-    },
-
-    getScripts() {
-        return [];
     },
 
     getStyles() {
@@ -31,6 +28,8 @@ Module.register("MMM-TickTick", {
     getTemplateData() {
         return {
             title: this.config.title,
+            displayHeader: this.config.displayHeader,
+            displayStyle: this.config.displayStyle || "list",
             tasksByProject: this.tasks || {}
         };
     },
@@ -69,22 +68,26 @@ Module.register("MMM-TickTick", {
                         const dateOnly = new Date(date);
                         dateOnly.setHours(0, 0, 0, 0);
 
+                        const hasTime = date.getHours() !== 0 || date.getMinutes() !== 0;
+
+                        const timeString = hasTime ? date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : "";
+
                         if (dateOnly.getTime() === today.getTime()) {
-                            formattedDueDate = "Today";
+                            formattedDueDate = "Today" + (hasTime ? `, ${timeString}` : "");
                             dueClass = "today";
                         } else if (dateOnly.getTime() === tomorrow.getTime()) {
-                            formattedDueDate = "Tomorrow";
+                            formattedDueDate = "Tomorrow" + (hasTime ? `, ${timeString}` : "");
                             dueClass = "tomorrow";
                         } else if (dateOnly < today) {
-                            formattedDueDate = "Past Due";
+                            formattedDueDate = "Past Due" + (hasTime ? `, ${timeString}` : "");
                             dueClass = "past-due";
                         } else {
                             // Anything else in the future
                             formattedDueDate = date.toLocaleDateString(undefined, {
+                                weekday: "short",
                                 month: "short",
-                                day: "numeric",
-                                year: "numeric"
-                            });
+                                day: "numeric"
+                            }) + (hasTime ? `, ${timeString}` : "");
                             dueClass = "normal";
                         }
                     }
@@ -100,7 +103,47 @@ Module.register("MMM-TickTick", {
 
             this.tasks = formatted;
             this.updateDom();
+            setTimeout(() => {
+                this.applyRotate();
+            }, 1000);
         }
     },
+
+    applyRotate() {
+        const container = document.getElementById("ticktick-project-container");
+        if (!container) {
+            console.warn("TickTick project container not found");
+            return;
+        }
+
+        const style = this.config.displayStyle || "list";
+        if (style === "list") {
+            const projects = container.querySelectorAll(".ticktick-project");
+            projects.forEach(p => p.classList.add("active"));
+        } else {
+            const projects = container.querySelectorAll(".ticktick-project");
+            if (projects.length === 0) return;
+
+            let currentIndex = 0;
+
+            function showProject(index) {
+                projects.forEach((proj, i) => {
+                    if (i === index) {
+                        proj.classList.add("active", "fadeIn");
+                    } else {
+                        proj.classList.remove("active", "fadeIn");
+                    }
+                });
+            }
+
+            showProject(currentIndex);
+
+            if (this.rotateInterval) clearInterval(this.rotateInterval);
+            this.rotateInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % projects.length;
+                showProject(currentIndex);
+            }, 20000);
+        }
+    }
 
 });
