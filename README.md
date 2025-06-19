@@ -1,13 +1,10 @@
 # MMM-TickTick
-Use this template for creating new MagicMirror² modules.
 
-See the [wiki page](https://github.com/Dennis-Rosenbaum/MMM-Template/wiki) for an in depth overview of how to get started.
+MagicMirror² module to display tasks from TickTick.
 
-# MMM-Template
+# Screenshots
 
-![Example of MMM-Template](./example_1.png)
-
-[Module description]
+![Example of MMM-TickTick](./example_1.png)
 
 ## Installation
 
@@ -17,13 +14,21 @@ In your terminal, go to your [MagicMirror²][mm] Module folder and clone MMM-Tem
 
 ```bash
 cd ~/MagicMirror/modules
-git clone [GitHub url]
+git clone https://github.com/sigel/MMM-TickTick.git
+cd MMM-TickTick
+npm install
 ```
+### First Run (Get Authentication Token)
+
+```bash
+npm run auth
+```
+Follow instructions.
 
 ### Update
 
 ```bash
-cd ~/MagicMirror/modules/MMM-Template
+cd ~/MagicMirror/modules/MMM-TickTick
 git pull
 ```
 
@@ -33,20 +38,17 @@ To use this module, add it to the modules array in the `config/config.js` file:
 
 ```js
     {
-        module: 'MMM-Template',
-        position: 'lower_third'
-    },
-```
-
-Or you could use all the options:
-
-```js
-    {
-        module: 'MMM-Template',
-        position: 'lower_third',
-        config: {
-            exampleContent: 'Welcome world'
-        }
+        module: 'MMM-TickTick',
+        position: 'top_left',
+        refreshInterval: 10 * 60 * 1000, // default 10 minutes
+        title: "TickTick Tasks", // Title Displayed in Header
+        displayHeader: true, // Show TickTick Logo & Title
+        displayStyle: "list", // list or rotate
+        maxTasks: 10, // Max tasks to show per project
+        projects: [ 
+			{ name: "My Tasks", pid: "58c5bf923109d118d45725a4" },
+            { name: "Shopping", pid: "31a5bf923109d118d45725a4" }
+		]
     },
 ```
 
@@ -54,13 +56,13 @@ Or you could use all the options:
 
 Option|Possible values|Default|Description
 ------|------|------|-----------
-`exampleContent`|`string`|not available|The content to show on the page
+`refreshInterval`|`number`|10 * 60 * 1000|Fetch tasks every 10 minutes
+`title`|`string`|TickTick Tasks|Title to show in header
+`displayHeader`|`boolean`|true|Show module header with TickTick logo and title
+`displayStyle`|`string`|list|'list' to show all or 'rotate' to fade between projects
+`maxTasks`|`number`|10|max tasks to show per project
+`projects`|`array`||List project ids and preferred name of each project
 
-## Sending notifications to the module
-
-Notification|Description
-------|-----------
-`TEMPLATE_RANDOM_TEXT`|Payload must contain the text that needs to be shown on this module
 
 ## Developer commands
 
