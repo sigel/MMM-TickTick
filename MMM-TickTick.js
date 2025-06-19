@@ -3,6 +3,7 @@ Module.register("MMM-TickTick", {
         tokenFilePath: "token.json", // Path to the token file
         refreshInterval: 10 * 60 * 1000, // default 10 minutes
         title: "TickTick Tasks",
+        displayStyle: "list", // list or rotate
         maxTasks: 10,
         projects: [ 
 			{ name: "My Tasks", pid: "58c5bf923109d118d45725a4" }
@@ -51,7 +52,53 @@ Module.register("MMM-TickTick", {
     socketNotificationReceived(notification, payload) {
         if (notification === "TICKTICK_TASKS") {
             console.log("[MMM-TickTick] Received tasks:", payload);
-            this.tasks = payload;
+
+            const formatted = {};
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            for (const [project, tasks] of Object.entries(payload)) {
+                formatted[project] = tasks.map(task => {
+                    let formattedDueDate = null;
+                    let dueClass = null;
+
+                    if (task.dueDate) {
+                        const date = new Date(task.dueDate);
+                        const dateOnly = new Date(date);
+                        dateOnly.setHours(0, 0, 0, 0);
+
+                        if (dateOnly.getTime() === today.getTime()) {
+                            formattedDueDate = "Today";
+                            dueClass = "today";
+                        } else if (dateOnly.getTime() === tomorrow.getTime()) {
+                            formattedDueDate = "Tomorrow";
+                            dueClass = "tomorrow";
+                        } else if (dateOnly < today) {
+                            formattedDueDate = "Past Due";
+                            dueClass = "past-due";
+                        } else {
+                            // Anything else in the future
+                            formattedDueDate = date.toLocaleDateString(undefined, {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric"
+                            });
+                            dueClass = "normal";
+                        }
+                    }
+
+                    return {
+                        ...task,
+                        formattedDueDate,
+                        dueClass
+                    };
+                });
+            }
+
+
+            this.tasks = formatted;
             this.updateDom();
         }
     },

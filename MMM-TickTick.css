@@ -1,19 +1,66 @@
 .MMM-TickTick {
-    
+	min-width: 325px;
+	padding: .75em;
+	border-radius: 8px;
+    background: rgba(0,0,0,.75);
+	color: #fff;
 }
 
-.project-name {
-	font-weight: bold;
-	font-size: 1.2em;
-	margin-top: 10px;
+.MMM-TickTick ul,
+.MMM-TickTick li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-.ticktick-task {
-	margin-left: 10px;
+.MMM-TickTick li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: .5em .75em;
+	border-bottom: 1px solid #232222;
+	font-size: .75em;
 }
 
-.due-date {
-	color: gray;
+.MMM-TickTick .ticktick-project li:last-child {
+	border: 0;
+}
+
+.MMM-TickTick .ticktick-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.MMM-TickTick .ticktick-header h2 {
+    margin: 0;
+}
+
+.MMM-TickTick .ticktick-header .logo {
+	margin-right: 20px;
+}
+
+.MMM-TickTick .ticktick-project {
+	margin-bottom: 10px;
+}
+.MMM-TickTick .project-name {
+	margin: 0;
+	padding: 4px 12px;
+	border-radius: 4px;
+	background: rgba(0,0,0,.55);
+	font-size: .9em;
+}
+
+.MMM-TickTick .task-title {
+	padding-right: 20px;
+}
+
+.MMM-TickTick .due-date {
+	color: #b3b2b2;
 	font-size: 0.9em;
-	margin-left: 8px;
+	text-transform: uppercase;
 }
+
+.MMM-TickTick .today { color: #fec107; }
+.MMM-TickTick .tomorrow { color: #42a5f6; }
+.MMM-TickTick .paste-due { color: red; }
