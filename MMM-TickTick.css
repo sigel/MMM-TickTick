@@ -2,7 +2,7 @@
 	width: 100%;
 	padding: .75em;
 	border-radius: 8px;
-	font-size: 20px;
+	font-size: 21px;
     line-height: 1em;
     background: rgba(0,0,0,.55);
 	color: #fff;
@@ -36,7 +36,7 @@
 
 .MMM-TickTick .ticktick-header h2 {
     margin: 0;
-	font-size: 1.25em;
+	font-size: 1.15em;
 }
 
 .MMM-TickTick .ticktick-header .logo {

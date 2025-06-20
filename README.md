@@ -5,6 +5,7 @@ MagicMirror² module to display tasks from TickTick.
 # Screenshots
 
 ![Example of MMM-TickTick](https://i.imgur.com/yy04oxB.jpeg)
+![Authentication](https://i.imgur.com/LF2sLos.jpeg)
 
 ## Installation
 
@@ -51,6 +52,10 @@ To use this module, add it to the modules array in the `config/config.js` file:
         ]
     },
 ```
+
+How to find Project ID's in TickTick Webapp:
+
+![How to find project id](https://i.imgur.com/yf2ZAO8.jpeg)
 
 ## Configuration options
 
