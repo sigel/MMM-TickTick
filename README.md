@@ -4,13 +4,13 @@ MagicMirror² module to display tasks from TickTick.
 
 # Screenshots
 
-![Example of MMM-TickTick](./example_1.png)
+![Example of MMM-TickTick](https://i.imgur.com/yy04oxB.jpeg)
 
 ## Installation
 
 ### Install
 
-In your terminal, go to your [MagicMirror²][mm] Module folder and clone MMM-Template:
+In your terminal, go to your [MagicMirror²][mm] Module folder and clone MMM-TickTick:
 
 ```bash
 cd ~/MagicMirror/modules
@@ -45,10 +45,10 @@ To use this module, add it to the modules array in the `config/config.js` file:
         displayHeader: true, // Show TickTick Logo & Title
         displayStyle: "list", // list or rotate
         maxTasks: 10, // Max tasks to show per project
-        projects: [ 
-			{ name: "My Tasks", pid: "58c5bf923109d118d45725a4" },
+        projects: [
+            { name: "My Tasks", pid: "58c5bf923109d118d45725a4" },
             { name: "Shopping", pid: "31a5bf923109d118d45725a4" }
-		]
+        ]
     },
 ```
 
@@ -62,12 +62,5 @@ Option|Possible values|Default|Description
 `displayStyle`|`string`|list|'list' to show all or 'rotate' to fade between projects
 `maxTasks`|`number`|10|max tasks to show per project
 `projects`|`array`||List project ids and preferred name of each project
-
-
-## Developer commands
-
-- `npm install` - Install devDependencies like ESLint.
-- `npm run lint` - Run linting and formatter checks.
-- `npm run lint:fix` - Fix linting and formatter issues.
 
 [mm]: https://github.com/MagicMirrorOrg/MagicMirror

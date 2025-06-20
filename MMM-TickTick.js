@@ -50,7 +50,6 @@ Module.register("MMM-TickTick", {
 
     socketNotificationReceived(notification, payload) {
         if (notification === "TICKTICK_TASKS") {
-            console.log("[MMM-TickTick] Received tasks:", payload);
 
             const formatted = {};
             const today = new Date();

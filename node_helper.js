@@ -74,7 +74,6 @@ module.exports = NodeHelper.create({
     },
 
     async fetchTasks() {
-        console.log("[MMM-TickTick] fetchTasks() called");
         
         if (!this.accessToken) {
             console.error("[MMM-TickTick] Cannot fetch tasks: No access token available");

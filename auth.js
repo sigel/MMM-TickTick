@@ -53,6 +53,7 @@ app.get('/', (req, res) => {
               <button type="submit">Authorize</button>
             </form>
             <p class="small"><a href="https://developer.ticktick.com/manage" target="_blank">Click here</a> to register your application and obtain a Client ID and Client Secret.</p>
+            <p class="small">OAuth redirect URL: <code>http://${localIp}:${PORT}/callback</code></p>
           </div>
       </div>
     </body>
@@ -114,5 +115,5 @@ app.get('/callback', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Open http://${localIp}:${PORT}/ in your browser to authenticate. Make sure address matches OAuth redirect URL in TickTick App.`);
+  console.log(`Open http://${localIp}:${PORT}/ in your browser to authenticate. Use http://${localIp}:${PORT}/callback as your OAuth redirect URL in TickTick App.`);
 });
