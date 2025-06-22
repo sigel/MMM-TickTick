@@ -41,15 +41,17 @@ To use this module, add it to the modules array in the `config/config.js` file:
     {
         module: 'MMM-TickTick',
         position: 'top_left',
-        refreshInterval: 10 * 60 * 1000, // default 10 minutes
-        title: "TickTick Tasks", // Title Displayed in Header
-        displayHeader: true, // Show TickTick Logo & Title
-        displayStyle: "list", // list or rotate
-        maxTasks: 10, // Max tasks to show per project
-        projects: [
-            { name: "My Tasks", pid: "58c5bf923109d118d45725a4" },
-            { name: "Shopping", pid: "31a5bf923109d118d45725a4" }
-        ]
+        config {
+            refreshInterval: 10 * 60 * 1000, // default 10 minutes
+            title: "TickTick Tasks", // Title Displayed in Header
+            displayHeader: true, // Show TickTick Logo & Title
+            displayStyle: "list", // list or rotate
+            maxTasks: 10, // Max tasks to show per project
+            projects: [
+                { name: "My Tasks", pid: "58c5bf923109d118d45725a4" },
+                { name: "Shopping", pid: "31a5bf923109d118d45725a4" }
+            ]
+        }
     },
 ```
 
