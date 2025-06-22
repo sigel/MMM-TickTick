@@ -13,11 +13,9 @@ module.exports = NodeHelper.create({
     },
 
     socketNotificationReceived(notification, payload) {
-        if (notification === "CONFIG") {
-            console.log("[MMM-TickTick] Received configuration:", JSON.stringify(payload, null, 2));
+        if (notification === "TICKTICK_CONFIG") {
             // Make the token file path relative to the module directory
             this.tokenFilePath = path.join(this.path, payload.tokenFilePath);
-            console.log("[MMM-TickTick] Using token file path:", this.tokenFilePath);
             this.config = payload;
             
             // Clear any existing interval
@@ -34,7 +32,6 @@ module.exports = NodeHelper.create({
 
     loadTokens() {
         try {
-            console.log("[MMM-TickTick] Attempting to load tokens from:", this.tokenFilePath);
             if (!fs.existsSync(this.tokenFilePath)) {
                 console.error("[MMM-TickTick] Token file not found at:", this.tokenFilePath);
                 return;
@@ -42,7 +39,6 @@ module.exports = NodeHelper.create({
             const tokens = JSON.parse(fs.readFileSync(this.tokenFilePath));
             this.accessToken = tokens.access_token;
             this.tokenIssuedAt = Date.now();
-            console.log("[MMM-TickTick] Tokens loaded successfully");
         } catch (err) {
             console.error("[MMM-TickTick] Error loading tokens:", err.message);
         }

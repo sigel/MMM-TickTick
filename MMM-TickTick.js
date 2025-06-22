@@ -44,7 +44,7 @@ Module.register("MMM-TickTick", {
                 maxTasks: this.config.maxTasks,
                 projects: this.config.projects
             };
-            this.sendSocketNotification("CONFIG", config);
+            this.sendSocketNotification("TICKTICK_CONFIG", config);
         }
     },
 
@@ -72,13 +72,13 @@ Module.register("MMM-TickTick", {
                         const timeString = hasTime ? date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : "";
 
                         if (dateOnly.getTime() === today.getTime()) {
-                            formattedDueDate = "Today" + (hasTime ? `, ${timeString}` : "");
+                            formattedDueDate = "Today" + (hasTime ? ` · ${timeString}` : "");
                             dueClass = "today";
                         } else if (dateOnly.getTime() === tomorrow.getTime()) {
-                            formattedDueDate = "Tomorrow" + (hasTime ? `, ${timeString}` : "");
+                            formattedDueDate = "Tomorrow" + (hasTime ? ` · ${timeString}` : "");
                             dueClass = "tomorrow";
                         } else if (dateOnly < today) {
-                            formattedDueDate = "Past Due" + (hasTime ? `, ${timeString}` : "");
+                            formattedDueDate = "Past Due" + (hasTime ? ` · ${timeString}` : "");
                             dueClass = "past-due";
                         } else {
                             // Anything else in the future
@@ -86,7 +86,7 @@ Module.register("MMM-TickTick", {
                                 weekday: "short",
                                 month: "short",
                                 day: "numeric"
-                            }) + (hasTime ? `, ${timeString}` : "");
+                            }) + (hasTime ? ` · ${timeString}` : "");
                             dueClass = "normal";
                         }
                     }

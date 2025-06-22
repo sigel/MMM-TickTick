@@ -2,7 +2,7 @@
 	width: 100%;
 	padding: .75em;
 	border-radius: 8px;
-	font-size: 21px;
+	font-size: 20px;
     line-height: 1em;
     background: rgba(0,0,0,.55);
 	color: #fff;
@@ -49,6 +49,8 @@
 	margin-bottom: 10px;
 }
 
+.MMM-TickTick .ticktick-project:last-child { margin-bottom: 0; }
+
 .MMM-TickTick .project-name {
 	margin: 0;
 	padding: 4px 12px;
@@ -63,7 +65,12 @@
 .MMM-TickTick .ticktick-project:nth-child(even) .project-name { border-color: #5574d1; }
 
 .MMM-TickTick .task-title {
-	padding-right: 20px;
+	max-width: 155px;
+	padding-right: 15px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	font-size: 1.1em;
 }
 
 .MMM-TickTick .due-date {
