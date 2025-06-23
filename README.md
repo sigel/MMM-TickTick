@@ -4,8 +4,8 @@ MagicMirror² module to display tasks from TickTick.
 
 # Screenshots
 
-![Example of MMM-TickTick](https://i.imgur.com/yy04oxB.jpeg)
-![Authentication](https://i.imgur.com/LF2sLos.jpeg)
+![Example of MMM-TickTick](http://sigelnetwork.com/wp-content/uploads/2025/06/MMM-TickTick-Screenshot-1.jpg)
+![Authentication](http://sigelnetwork.com/wp-content/uploads/2025/06/MMM-TickTick-Screenshot-2.jpg)
 
 ## Installation
 
@@ -57,17 +57,17 @@ To use this module, add it to the modules array in the `config/config.js` file:
 
 How to find Project ID's in TickTick Webapp:
 
-![How to find project id](https://i.imgur.com/yf2ZAO8.jpeg)
+![How to find project id](http://sigelnetwork.com/wp-content/uploads/2025/06/MMM-TickTick-Screenshot-3.jpg)
 
 ## Configuration options
 
 Option|Possible values|Default|Description
 ------|------|------|-----------
 `refreshInterval`|`number`|10 * 60 * 1000|Fetch tasks every 10 minutes
-`title`|`string`|TickTick Tasks|Title to show in header
-`displayHeader`|`boolean`|true|Show module header with TickTick logo and title
-`displayStyle`|`string`|list|'list' to show all or 'rotate' to fade between projects
-`maxTasks`|`number`|10|max tasks to show per project
+`title`|`string`|`TickTick Tasks`|Title to show in header
+`displayHeader`|`boolean`|`true`|Show module header with TickTick logo and title
+`displayStyle`|`string`|`list`|'list' to show all or 'rotate' to fade between projects
+`maxTasks`|`number`|`10`|max tasks to show per project
 `projects`|`array`||List project ids and preferred name of each project
 
 [mm]: https://github.com/MagicMirrorOrg/MagicMirror
